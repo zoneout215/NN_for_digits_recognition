@@ -8,3 +8,5 @@ programming NN from scratch for educational purpuses
 * **train.csv.zip** - the csv with train data of digit images
 * **network.py** - the python script which implements the NN and classifies images
 
+inspired by: https://www.youtube.com/watch?v=w8yWXqWQYmU
+
