@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 def init_params():
     """
@@ -88,7 +87,7 @@ def one_hot(Y):
     return one_hot_Y
 
 
-def backward_propagation(Z1, A1, A2, W2, X, Y):
+def backward_propagation(Z1, A1, Z2, A2, W1, W2, X, Y):
     """
     Implements backward propagation.
 
@@ -154,9 +153,11 @@ def gradient_descending(X, Y, eta, iterations):
             print("Accuracy: ", get_accuracy(predictions, Y))
     return W1, b1, W2, b2
 
-data = pd.read_csv('train.csv')
-
-data = np.array(data)
+data = []
+with open('train.csv') as f:
+    data = [list(map(int,line.split(','))) for i,line in enumerate(f) if i > 0]
+    
+data = np.array(data[1:])
 m, n = data.shape
 np.random.shuffle(data)
 
@@ -169,8 +170,5 @@ data_train = data[1000:m].T
 Y_train = data_train[0]
 X_train = data_train[1:n]
 X_train = X_train / 255. # Normalize the data
-_,m_train = X_train.shape
-
-
-
+_y,m_train = X_train.shape
 W1, b1, W2, b2 = gradient_descending(X_train, Y_train, 0.1, 500)
